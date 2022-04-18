@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script
+         src="https://unpkg.com/react@17/umd/react.development.js"
+         crossorigin
+      ></script>
+      <script
+         src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+         crossorigin
+      ></script>
+      <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+      <title>Props</title>
+      <style>
+         .button {
+            background-color: red;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            font-size: 30px;
+            text-decoration: none;
+         }
+      </style>
+   </head>
+
+   <body>
+      <!-- 
+			Làm việc với JSX
+
+			// Phần I
+         - Xử lý DOM events
+         - Component do chúng ta định nghĩa phải viết in hoa ký tự đầu
+            - Chọn component trong 1 object
+         - Booleans, Null & Undefined không được render
+         - Kết hợp toán tử logic để render theo điều kiện
+
+         // Phần II
+         - Props trong JSX
+            - <YourComponent
+                  propName1="String literals"
+                  propName2={expression}
+               />
+            - Props default to "true"
+            - Spread/Rest props
+            - Children prop
+               - <YourComponent>String literals</YourComponent>
+               - <YourComponent>{expression}</YourComponent>
+            - Render props
+		 -->
+      <div id="root"></div>
+
+      <script type="text/babel">
+         // const Form = {
+         //    Input() {
+         //       return <input />
+         //    },
+         //    Checkbox() {
+         //       return <input type="checkbox" />
+         //    },
+         // }
+
+         function Button({ title, href, onClick }) {
+            let Component = 'button'
+            const props = {
+               className: 'button'
+            }
+
+            if (href) {
+               Component = 'a'
+               props.href = href
+               props.type = 'button'
+            }
+            if (onClick) {
+               props.onClick = onClick
+            }
+
+            return <Component {...props}>{title}</Component>
+         }
+
+         // App.js (container)
+         function App() {
+            // const type = 'Input'
+
+            // const Component = Form[type]
+
+            // return (
+            //    <div id="wrapper">
+            //       <Component />
+            //    </div>
+            // )
+
+            return (
+               <div id="wrapper">
+                  <Button
+                     title="Click me!"
+                     href="https://www.instagram.com/tranbao2707/"
+                     onClick={() => console.log(Math.random())}
+                  />
+               </div>
+            )
+         }
+         ReactDOM.render(<App />, document.getElementById('root'))
+
+
+         //--- Kết hợp toán tử logic và bool, null, undefine để render theo điều kiện
+         // function App1({title, content}) {
+         //    let boolean = true
+
+         //    return (
+         //       <div id="wrapper">
+         //          {boolean && <h1>Hello!</h1>}
+         //          <h2>h2: {title || content}</h2>
+         //       </div>
+         //    )
+         // }
+
+         // index.js
+         // ReactDOM.render(<App1 title="" content="Content" />, document.getElementById('root'))
+      </script>
+   </body>
+</html>

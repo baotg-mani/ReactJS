@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script
+         src="https://unpkg.com/react@17/umd/react.development.js"
+         crossorigin
+      ></script>
+      <script
+         src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+         crossorigin
+      ></script>
+      <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+      <title>Props</title>
+   </head>
+
+   <body>
+      <!-- 
+			Làm việc với JSX
+
+			// Phần I
+         - Xử lý DOM events
+         - Component do chúng ta định nghĩa phải viết in hoa ký tự đầu
+            - Chọn component trong 1 object
+         - Booleans, Null & Undefined không được render
+         - Kết hợp toán tử logic để render theo điều kiện
+
+         // Phần II
+         - Props trong JSX
+            - <YourComponent
+                  propName1="String literals"
+                  propName2={expression}
+               />
+            - Props default to "true"
+            - Spread/Rest props
+            - Children prop
+               - <YourComponent>String literals</YourComponent>
+               - <YourComponent>{expression}</YourComponent>
+            - Render props (thường là children prop)
+		 -->
+      <div id="root"></div>
+
+      <script type="text/babel">
+         function Button({ title, primary }) {
+            console.log(primary)
+
+            return <button>{title}</button>
+         }
+
+         function Buttonn({ children }) {
+            return <button>{children}</button>
+         }
+
+         function Input({ label, ...inputProps }) {
+            return (
+               <div>
+                  <label>{label}</label>
+                  <input {...inputProps} />
+               </div>
+            )
+         }
+
+         /** 
+         parameters:
+            data: cars[]
+            children: arrow function (item) => <li key={item}>{item}</li>
+         **/
+         function List({ data, children }) {
+            return (
+               <ul>
+                  {data.map((...props) => children(...props))}
+               </ul>
+            )
+         }
+
+         function App() {
+            const cars = ['Audi', 'BMW', 'Volvo']
+
+            return (
+               <div id="wrapper">
+                  <Button primary title="Click!" />
+                  <Buttonn>Children prop</Buttonn>
+                  <Input
+                     label="Username:"
+                     placeholder="typing here..."
+                     type="password"
+                     onFocus={() => {
+                        console.log(Math.random())
+                     }}
+                  ></Input>
+                  <List data={cars}>
+                     {(item, index) => <li key={index}>{item}</li>}  
+                  </List>
+               </div>
+            )
+         }
+
+         ReactDOM.render(<App />, document.getElementById('root'))
+      </script>
+   </body>
+</html>

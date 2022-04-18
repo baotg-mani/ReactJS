@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>JSX</title>
+   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+   <!-- 
+    JSX -> Javascript XML (giống HTML)
+
+    1. Luôn dùng React.createElement()? Vấn đề ?
+    2. JSX ? Live demo: https://bit.ly/2VOIMN7
+        JSX giúp viết code XML bên trong code Javascript, giúp tạo React element mà không cần phải viết nhiều React.createElement()
+    3. JSX không phải là HTML
+        Cần có Javascript, Babel để dùng JSX (Babel là 1 thư viện Javascript, dùng để phân tích cú pháp và chuyển đổi cú pháp, chuyển đổi JSX thành Javascript)
+    4. JSX và React-DOM ?
+
+  -->
+   <div id="root"></div>
+
+   <!-- Bài tập cũ
+  <ul>
+    <li>Javascript</li>
+    <li>ReactJS</li>
+  </ul> -->
+
+   <script type="text/babel">
+      /* React.createElement */
+
+      // const ulReact = React.createElement(
+      //   'ul',
+      //   {},
+      //   React.createElement('li', {}, 'Javascript'),
+      //   React.createElement('li', {}, 'ReactJS')
+      // )
+
+
+      /* JSX + Babel -> React.createElement */
+
+      // const ul = <ul>
+      //   <li>Javascript</li>
+      //   <li>ReactJS</li>
+      // </ul>
+
+
+      const courses = [
+         {
+            name: 'HTML, CSS'
+         },
+         {
+            name: 'Resposive web design'
+         },
+         {
+            name: 'ReactJS'
+         }
+      ]
+
+      const jsx = <ul>
+         {courses.map((course, index) =>
+            <li key={index}>{course.name}</li>
+         )}
+      </ul>
+
+      ReactDOM.render(jsx, document.getElementById('root'))
+   </script>
+
+</body>
+
+</html>
