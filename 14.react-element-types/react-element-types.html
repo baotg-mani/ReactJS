@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>React element types</title>
+      <script
+         src="https://unpkg.com/react@17/umd/react.development.js"
+         crossorigin
+      ></script>
+      <script
+         src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+         crossorigin
+      ></script>
+      <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+   </head>
+
+   <body>
+      <!-- 
+    1. React element types: string, function/class
+      -Wrapper
+        - Header -> Header compenent
+        - Content -> Content component
+        - Footer - > Footer component
+    2. Biểu diễn đơn giản với JSX
+   -->
+      <div id="app"></div>
+      <div id="exercise"></div>
+
+      <script type="text/babel">
+         // Header component
+         function Header() {
+            return <div className="header">Header (function component)</div>
+         }
+         // Content component
+         function Content() {
+            return <div className="content">Content (function component)</div>
+         }
+         // Footer component
+         class Footer extends React.Component {
+            render() {
+               return <div className="footer">Footer (class component)</div>
+            }
+         }
+         // Initiate React element via JSX (App.js)
+         const app = (
+            <div className="wrapper">
+               <Header></Header>
+               <Content />
+               <Footer />
+            </div>
+         )
+         console.log(app)
+         // Render to DOM
+         ReactDOM.render(app, document.querySelector('#app'))
+
+         //---------- Exercise ----------
+
+         // PostItem.js
+         function PostItem() {
+            return (
+               <div class="post-item">
+                  <img
+                     src="https://files.fullstack.edu.vn/f8-prod/blog_posts/1637/61b175b3debf2.jpg"
+                     alt="Cấu trúc cơ bản trong HTML"
+                  ></img>
+                  <h2 class="post-title">
+                     C#(.NET) - Tuong tac voi file Excel
+                  </h2>
+                  <p class="post-desc">
+                     Ban co kien thuc ngon ngu C#! Ban muon thuc hien tuong tac
+                     voi Excel
+                  </p>
+                  <p class="post-published">Mot ngay truoc - 5 phut doc</p>
+               </div>
+            )
+         }
+         // Initiate React element via JSX
+         const ex = (
+            <div class="posts-list">
+               <PostItem />
+               <PostItem />
+               <PostItem />
+            </div>
+         )
+         // Render to DOM
+         ReactDOM.render(ex, document.getElementById('exercise'))
+      </script>
+   </body>
+</html>
