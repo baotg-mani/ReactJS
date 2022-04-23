@@ -37,8 +37,9 @@
    -------------(Luôn đúng trong 3 trường hợp):
    - Callback luôn được gọi sau khi Component chứa nó được mounted
    - Cleanup function luôn được gọi trước khi component bị unmounted
+   - Cleanup function luôn được gọi trước khi callback được gọi (trừ lần mounted)
 
-
+### CODE 31.useEffect with DOM event và học dùng Cleanup function
 
 import React, { useState, useEffect } from 'react'
 
@@ -52,6 +53,8 @@ function Content() {
    const [list, setList] = useState([])
    const [showGoToTop, setShowGoToTop] = useState(false)
    const [width, setWidth] = useState(window.innerWidth)
+   const [countdown, setCountdown] = useState(180)
+   const [photo, setPhoto] = useState()
 
 
    // 1. useEffect(callback)
@@ -72,6 +75,16 @@ function Content() {
    //       })
    // }, [])
 
+   // Side efect: setInterval
+   useEffect(() => {
+      const timerId = setInterval(() => {
+         setCountdown(prevState => prevState - 1)
+      }, 1000)
+
+      // Cleanup func
+      return () => clearInterval(timerId)
+   }, [])
+
 
    // 3. useEffect(callback, [deps])
 
@@ -84,7 +97,7 @@ function Content() {
          })
    }, [type])
 
-   
+
    // side effect: DOM event-scroll
    useEffect(() => {
 
@@ -114,14 +127,41 @@ function Content() {
       return () => {
          window.removeEventListener('resize', handleResize)
       }
-   })
+   }, [])
+
+   // Side effect: Cleanup when change photo
+   useEffect(() => {
+      // cleanup func
+      return () => {
+         photo && URL.revokeObjectURL(photo.preview)
+      }
+   }, [photo])
+
+
+   const handlePreviewPhoto = e => {
+      const photo = e.target.files[0]
+
+      photo.preview = URL.createObjectURL(photo)
+
+      setPhoto(photo)
+   }
 
 
    return (
       <React.Fragment>
          <h1>Learn Hook useEffect</h1>
          <h2>Width of Screen: {width}</h2>
+         <h2>Timer: {countdown}</h2>
+         <input
+            type="file"
+            onChange={handlePreviewPhoto}
+         />
+         {photo && <img
+            src={photo.preview}
+            alt=""
+            width="60%" />}
 
+         <br />
          <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
