@@ -14,3 +14,4 @@
    - @input: state hiện tại (ban đầu = initState), action
    - @output: state mới
 4. Dispatch (kích hoạt 1 action)
+   - syntax: dispatch(action)
