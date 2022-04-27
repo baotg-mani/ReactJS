@@ -1,5 +1,5 @@
 # forwardRef(func component) HOC: giúp chuyển tiếp Ref giữa các component cha con
-   - Dùng ở component đích, component là lấy ra element
+   - Dùng ở component đích, component mà lấy ra element
    - Lấy ref của component cha (component sử dụng element ref lấy được) truyền vào đối số thứ 2 của funtion component con (component nằm trong '(...)')
 
 
