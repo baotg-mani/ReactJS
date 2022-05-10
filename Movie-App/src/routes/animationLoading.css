@@ -1,0 +1,44 @@
+.container {
+   width: 70%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+ 
+ .loader {
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+.lds_dual_ring {
+   display: inline-block;
+   width: 80px;
+   height: 80px;
+}
+
+.lds_dual_ring:after {
+   content: " ";
+   display: block;
+   width: 64px;
+   height: 64px;
+   margin: 8px;
+   border-radius: 50%;
+   border: 6px solid rgb(41, 129, 216);
+   border-color: #333 transparent #333 transparent;
+   animation: lds_dual_ring 1.2s linear infinite;
+}
+
+/* thuộc tính điều khiển diễn biến hành động của 1 thành phần, dùng kèm thuộc tính animation */
+/* định dạng thành phần theo phần trăm thời gian hành động diễn ra */
+@keyframes lds_dual_ring {
+   0% {
+      transform: rotate(0deg);
+   }
+
+   100% {
+      transform: rotate(360deg);
+   }
+}

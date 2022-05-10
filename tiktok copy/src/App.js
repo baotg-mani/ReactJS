@@ -2,24 +2,23 @@
 import { Route, Routes, Link } from 'react-router-dom';
 import DetailMovie from './routes/Detail'
 import HomePage from './routes/Home'
+import './App.css'
 
 function App() {
 
    return (
       <div>
          <nav>
-            <ul>
-               <li>
-                  <Link to='/'>Home</Link>
-               </li>
-               <li>
-                  <Link to='/movie'>Detail</Link>
-               </li>
-            </ul>
+            <Link className='tab' to='/'>Home</Link>
+            <Link className='tab' to='/movie'>Detail</Link>
+            <Link className='tab' to='/bog'>Blog</Link>
+            <Link className='tab' to='/about'>About</Link>
          </nav>
+         <br />
+         <br />
 
          <Routes>
-            <Route path="/movie" element={<DetailMovie />} />
+            <Route path="/movie/:id" element={<DetailMovie />} />
             <Route path="/" element={<HomePage />} />
          </Routes>
       </div>
